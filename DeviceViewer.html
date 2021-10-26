@@ -1,0 +1,248 @@
+<head>
+    <link rel="stylesheet" href="ViewerStylesheet.css">
+
+
+
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+
+</style>
+</head>
+<div id="inner_wrap">  
+    <!--The Main Thing-->
+    <div id="wrapper">
+        <div class="phone view_2" id="phone_1" style="width: 375px; height: 812px;">
+            <iframe class="frame view_2" id="frame_1"></iframe>
+        </div>
+    </div>
+
+<!--Controls etc.-->
+    <div id="controls">
+        <!--Idea by /u/aerosole-->
+    </div>
+
+    <div id="phone-controls">
+
+    <div id="views">
+        <button value="1">Front View:Horizontal</button>
+        <button value="2">Front View:Vertical</button>
+    </div>
+
+    <div id="phones">
+        <button value="1">iPhone X</button>
+        <button value="2">iPhone 6/7/8</button>
+        <button value="3">Galaxy s5</button>
+        <button value="4">Pixel 2</button>
+        <button value="5">iPad</button>
+        
+
+    </div>
+    <button value="#" class= " collection" id="collection">Collection</button>
+    
+    </div>
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" id="demo">
+   </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://unpkg.com/cosmicjs@3.4.4/cosmicjs.browser.min.js">
+</script>
+
+<script>
+const api = Cosmic(); //Initialize the CosmicJS api object 
+const bucket = api.bucket({
+    slug: 'e8df8ba0-06f5-11ea-bdbb-8f71d79eeea2',
+    read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr'
+});
+
+
+
+    /*Only needed for the controls*/
+phone = document.getElementById("phone_1")
+iframe = document.getElementById("frame_1")
+/*View*/
+function updateView(view) {
+  if (view) {
+    phone.className = "phone view_" + view;
+    iframe.className = "frame view_" + view;
+
+    if(iframe.className === "frame view_1"){
+        phoneW = parseInt(phone.style.width);
+        phoneH = parseInt(phone.style.height);
+        iframe.style.height = phoneW.toString() + "px";
+        iframe.style.width = phoneH.toString() + "px";
+        iframe.style.position = "absolute"
+        iframe.style.top = ((phoneH-phoneW)/2).toString() + "px"
+        iframe.style.left = ((phoneW-phoneH)/2).toString() +"px"
+        iframe.style.transform = "rotateZ(-90deg)"
+        iframe.style.transition = "";
+
+    }
+    else if(iframe.className === "frame view_2"){
+        phoneW = parseInt(phone.style.width);
+        phoneH = parseInt(phone.style.height);
+        iframe.style.height = phoneH.toString() + "px";
+        iframe.style.width = phoneW.toString() + "px";
+        iframe.style.position = "";
+        iframe.style.top = "";
+        iframe.style.left = "";
+        iframe.style.transform = "";
+        iframe.style.transition = "";
+    }
+  }
+}
+function updateSize() {
+    if(iframe.className === "frame view_1"){
+        phoneW = parseInt(phone.style.width);
+        phoneH = parseInt(phone.style.height);
+        iframe.style.height = phoneW.toString() + "px";
+        iframe.style.width = phoneH.toString() + "px";
+        iframe.style.position = "absolute"
+        iframe.style.top = ((phoneH-phoneW)/2).toString() + "px"
+        iframe.style.left = ((phoneW-phoneH)/2).toString() +"px"
+        iframe.style.transform = "rotateZ(-90deg)"
+        iframe.style.transition = "all 0.5s ease";
+
+    }
+    else if(iframe.className === "frame view_2"){
+        phoneW = parseInt(phone.style.width);
+        phoneH = parseInt(phone.style.height);
+        iframe.style.height = phoneH.toString() + "px";
+        iframe.style.width = phoneW.toString() + "px";
+        iframe.style.position = ""
+        iframe.style.top = ""
+        iframe.style.left = ""
+        iframe.style.transform = ""
+        iframe.style.transition = "all 0.5s ease";
+    }
+}
+
+document.getElementById("views").addEventListener("click", function(evt) {
+  updateView(evt.target.value);
+});
+      
+
+const somefunction = async (bucket) => {
+
+         const data = await bucket.getObjects({
+            type: 'collections',
+            props:'title,slug',
+            pretty:'true',
+            format:'json'
+            })
+
+            return await data.objects
+
+}
+var modal = document.getElementById("myModal");
+
+  window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+document.getElementById("collection").addEventListener("click", function (evt){
+ 
+    somefunction(bucket).then(collections =>{
+        var collection= collections;
+        for (let i = 0; i < collection.length; i++) {
+              var line = document.createElement("a");
+              var PP=collection[i].slug.toString();
+              line.href="https://soumyajitk.github.io/cms-mobile-viewer/DeviceViewer.html?slug="
+                + ArticleSlug
+                + "&status=all"+"&collection="+collection[i].slug;
+              line.classList.add('ATag');
+              line.innerText = collection[i].title;
+              document.getElementById("demo").appendChild(line);
+              var p=document.createElement('p');
+              p.classList.add('PClass');
+              document.getElementById("demo").appendChild(p);
+
+    }
+    modal.style.display = "block";
+
+    });  
+});
+
+
+
+document.getElementById("phones").addEventListener("click", function(evt) {
+
+  if(evt.target.value == 1){
+    // iphone x
+    width = 375;
+    height = 812; 
+  }
+
+  if(evt.target.value == 2){
+    // iphone 6/7/8
+    width = 375;
+    height = 667; 
+  }
+
+  if(evt.target.value == 3){
+    // galaxy s5
+    width = 360;
+    height = 640;  
+  }
+
+  if(evt.target.value == 4){
+    // pixel 2
+    width = 411;
+    height = 731; 
+  }
+
+  if(evt.target.value == 5){
+    // ipad
+    width = 768;
+    height = 1024; 
+  }
+    phone.style.width = width + "px";
+    phone.style.height = height + "px";
+    updateSize()
+});
+
+
+ const url = new URL(location);
+ const ArticleSlug = url.searchParams.get('slug');
+ const collect=url.searchParams.get('collection');
+ var j = (collect != null ? collect : 'null');
+
+ iframe.src = "https://soumyajitk.github.io/cms-mobile-viewer/index.html?slug="
+ + ArticleSlug
+ + "&status=all&collection="+j;
+
+  if (iframe.attachEvent){
+      iframe.attachEvent("onload", function(){
+          afterLoading();
+      });
+  } else {
+      iframe.onload = function(){
+          afterLoading();
+      };
+  }
+
+function afterLoading(){
+
+    setTimeout(function() {
+        phone.className = "phone view_2";
+    }, 1000);
+
+}
+
+
+
+
+
+</script>
