@@ -1,0 +1,310 @@
+<!--    This script was designed to solve the problems with the github version of the content management system.
+        The goal is for the script to be easy to use and work with the CosmicJS api.
+        Content is pulled from fields populated by the content team and then formatted in an html doc to display as a webpage
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=375px,height=812px, initial-scale=1">
+<script>
+    if (!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+    }
+
+    (function (e, t) {
+        var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
+            ; r.type = "text/javascript"
+            ; r.integrity = "sha384-a+mq7tiLwde/00Oc7avFHLn/ttGfdAq1rtZc7u97SEzIiyYoT2IsOKWCkAThwdEu"
+            ; r.crossOrigin = "anonymous"; r.async = true
+            ; r.src = "https://cdn.amplitude.com/libs/amplitude-5.3.0-min.gz.js"
+            ; r.onload = function () {
+                if (!e.amplitude.runQueuedFunctions) {
+                    console.log("[Amplitude] Error: could not load SDK")
+                }
+            }
+            ; var i = t.getElementsByTagName("script")[0]; i.parentNode.insertBefore(r, i)
+            ; function s(e, t) {
+            e.prototype[t] = function () {
+                this._q.push([t].concat(Array.prototype.slice.call(arguments, 0))); return this
+            }
+            }
+        var o = function () { this._q = []; return this }
+            ; var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"]
+            ; for (var u = 0; u < a.length; u++) { s(o, a[u]) } n.Identify = o; var c = function () {
+            this._q = []
+                ; return this
+            }
+            ; var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"]
+            ; for (var p = 0; p < l.length; p++) { s(c, l[p]) } n.Revenue = c
+            ; var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"]
+            ; function v(e) {
+                function t(t) {
+                e[t] = function () {
+                    e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
+                }
+                }
+                for (var n = 0; n < d.length; n++) { t(d[n]) }
+            } v(n); n.getInstance = function (e) {
+                e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase()
+                    ; if (!n._iq.hasOwnProperty(e)) { n._iq[e] = { _q: [] }; v(n._iq[e]) } return n._iq[e]
+            }
+            ; e.amplitude = n
+    })(window, document);
+    amplitude.getInstance().init("71f19c5c3896fd6eae8a8a7abe2ece45");
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- TODO: Fix CSS so it is not a hardcoded example from an older version of an article -->
+    <link rel="stylesheet" href="main.css">
+    <!-- TODO: Add Google Analytics? -->
+</head>
+<!-- This is the main body of html where the content will be displayed, each HTML element is styled according to their class as defined in the the CSS stylesheet-->
+<body class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <article class="post">
+
+                <!-- Put sytle inline to configure background image. -->
+                <div id="content-header"></div>
+                <div class="post-content"></div>
+                <div class="pos"></div>
+
+            </article>
+        </div>
+</body>
+
+<!-- <footer class="site-footer h-card">
+<data class="u-url" href="/"></data>
+
+<div class="wrapper">
+
+  <h2 class="footer-heading">Your awesome title</h2>
+
+  <div class="footer-col-wrapper">
+    <div class="footer-col footer-col-1">
+      <ul class="contact-list">
+        <li class="p-name">Your awesome title</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
+    </div>
+
+    <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+    <div class="footer-col footer-col-3">
+      <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+    </div>
+  </div>
+
+</div>
+
+</footer> -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142962903-2">
+</script>
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-142962903-2');
+
+</script>
+<!-- This is the include for the cosmic JS api -->
+
+<script src="https://unpkg.com/cosmicjs@3.4.4/cosmicjs.browser.min.js">
+</script>
+
+<!--
+    High level overview of how the script logic should work
+
+    Api call
+        get bucket object from database and passes it to a function 
+            search URL for a slug(formatted title)
+            uses slug to get specific content
+                Tests conditionals to determine what types of content are present  
+                    formats the content according to the CSS stylesheet
+-->
+<script>
+
+    const api = Cosmic(); //Initialize the CosmicJS api object 
+    const bucket = api.bucket({
+        slug: 'e8df8ba0-06f5-11ea-bdbb-8f71d79eeea2',
+        read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr'
+    });
+    window.val='';
+    async function DataInit(bucketObj) { //Function for encapsulation 
+
+        const url = new URL(location);
+        const ArticleSlug = url.searchParams.get('slug');
+        const contentStatus = url.searchParams.get('status');
+        const collection= url.searchParams.get('collection');
+
+        //searches the URL for a query string that would identify a specific piece of content based on a given cosmicJS slug
+        //format is https://whateverUrl?slug=foo-bar 
+
+        if (collection !== 'null'){
+            const somefunction = async (bucket) => {
+                const data = await bucketObj.getObject({
+                    slug: collection,
+                    read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr'
+                }); //All calls from the CosmicJS API are async so you might need to use the await keyword to make sure things process in order
+                return await data.object;
+            }
+            somefunction(bucket).then(collections =>{
+            var collect= collections;
+            val=collect.metadata.variables;
+        });
+
+        }
+
+        if (ArticleSlug !== null && contentStatus == 'all') { //Conditional to test if there is a slug passed in the url
+
+            const data = await bucketObj.getObject({
+                slug: ArticleSlug,
+                read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr',
+                status: contentStatus
+            }); //All calls from the CosmicJS API are async so you might need to use the await keyword to make sure things process in order
+            return await data.object //returns an object of that content
+            
+        }else if(ArticleSlug !== null && contentStatus == null){
+
+            const data = await bucketObj.getObject({
+                slug: ArticleSlug,
+                read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr'
+            }); //All calls from the CosmicJS API are async so you might need to use the await keyword to make sure things process in order
+            return await data.object //returns an object of that content
+        } else {
+            return null //If no slug is present return null 
+            //TODO: maybe include some error handling for broken sites
+        }
+    
+    }
+
+    async function GlosaaryItems(bucketObj) {
+        const data = await bucketObj.getObject({
+                slug: 'universal-glossary-v10',
+                read_key: 'HhDBORp1zz4j0cgE0VdlpW60DJoTYEBWitj0wOrNIx6ksw3Zpr'
+            });
+                return await data.object
+                
+    } 
+
+     function searchCollectionVar(word){
+
+            var lower=word.split("{{")
+            var upper=lower[1].split("}}")
+            var w=upper[0]
+            for(var key in val){
+                 var t=Object.keys(val[key]);
+                 if(w==t[0]){
+                            upper[0]=val[key][w];
+                            var Updatedgt= upper.join('')
+                            lower[1]=Updatedgt
+                            var Updatedlt=lower.join('')
+                            word=Updatedlt;  
+                        }
+                 }
+                 return word
+     }
+
+    DataInit(bucket).then(articleObj => {
+        if (articleObj !== null) {
+            // document.getElementsByClassName("post-content") is an array of the buckets in the cosmicJs databse 
+            //the current database, as of 01/14/20, is the first (and only) index of this array 
+            
+            GlosaaryItems(bucket).then(glossaryObj =>{
+               var glossary= glossaryObj.metadata.glossary_terms;
+
+               function FetchGlossary(a){
+                  for(let j=1;j<glossary.length;j++){
+                      if (glossary[j][a]!= undefined){ 
+                          return glossary[j][a]
+                
+                        }
+                    }
+                }
+              var words = articleObj.content.split(" ")
+              var count=0
+              for (let i=1; i<words.length; i++){
+                if (/^.*[>][-][</p>].*$/.test(words[i])==true) {
+                    count=count+1;
+                    var Pagebreak=words[i].split(">-")
+                    Pagebreak[0]= Pagebreak[0]+'class="PBreak"'
+                    Pagebreak.join(">") 
+                    words[i]=Pagebreak;
+
+                }
+                
+                if(/^[&lt;]{2}.*[&gt;]{2}$/.test(words[i])== true){
+                        var w=words[i]. slice(8, -8)
+                        var text=FetchGlossary(w)
+                        words[i]= '<b class="tool">'+w+'<span class="ext">'+text+'</span></b>';  
+                            
+                }               
+                else if(/^[&lt;]{2}.*[&gt;]{2}[.]$/.test(words[i])== true){
+                     var w=words[i]. slice(8, -9)
+                     var text=FetchGlossary(w)
+                     words[i]= '<b class="tool">'+w+'<span class="ext">'+text+'</span></b>';     
+                }
+                else if(/^.*[&lt;]{2}.*[&gt;]{2}.*$/.test(words[i])== true){
+                    var lower=words[i].split("&lt;&lt;")
+                    if (lower[1] !== undefined){
+                        var upper=lower[1].split("&gt;&gt;")
+                        var w=upper[0]
+                        var text=FetchGlossary(w)
+                        upper[0]= '<b class="tool">'+w+'<span class="ext">'+text+'</span></b>';
+                        var Updatedgt= upper.join('')
+                        lower[1]=Updatedgt
+                        var Updatedlt=lower.join('')
+                        words[i]=Updatedlt; 
+                    } 
+                }
+
+                if(val!==''){
+                    if(/^[{]{2}.*[}]{2}.*$/.test(words[i])==true){
+                        words[i]=searchCollectionVar(words[i]) 
+                    }
+                    else if(/^.*[{]{2}.*[}]{2}.*$/.test(words[i])==true){
+                        words[i]=searchCollectionVar(words[i])   
+                    }
+                }
+            }
+              var x= words.join(" ")
+              document.getElementsByClassName("post-content")[0]
+              .innerHTML = x;
+              //document.getElementsByClassName("pos")[0]
+              //.innerHTML = count;
+              
+            if (articleObj.metadata.main_media.url) { //articleObj.metadata.main_media.url should return truthy if there is a url in the main_media section 
+
+                if (articleObj.metadata.main_media.url.endsWith('.mp4' || '.webm')) { //Currently we pass the videos as .mp4 any additional video formats
+                    //will need to be added to this if statement 
+
+                    var videoElem = document.createElement('video');
+                    videoElem.src = articleObj.metadata.main_media.url;
+                    videoElem.controls = true;
+                    videoElem.className = "video";
+                    document.getElementById('content-header').appendChild(videoElem)
+
+                } else { //If articleObj.metadata.main_media.url returns falsey if no url is present
+                    document.getElementById("content-header")
+                        .style.cssText = "background: url(" + articleObj.metadata.main_media.url + "); background-size: cover;"
+                        + "background-repeat: no-repeat; background-position: center;";
+                }
+            }
+})
+        }
+    })
+
+</script>
+
+</html>
